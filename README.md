@@ -1,3 +1,5 @@
+# PLEASE FOR THE LOVE OF GOD, DO NOT COMMIT TO MAIN UNLESS ZION APPROVES!!!!
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
