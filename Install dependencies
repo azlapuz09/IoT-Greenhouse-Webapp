@@ -1,0 +1,171 @@
+🧱 Components You’ll Be Installing
+
+We’ll break it into 3 sections:
+
+🐍 Backend (Flask + MQTT + SQLite)
+
+🌐 Frontend (Vite + Tailwind)
+
+🔧 Supporting Tools (Mosquitto broker, cloudflared if testing remote access)
+
+I'll give you Fedora commands, then the Windows equivalents (for that occasional dual-boot life 👀).
+
+
+---
+
+🐍 Backend Setup (Flask + SQLite + MQTT client)
+
+✅ 1. Python + pip
+
+Fedora:
+
+sudo dnf install python3 python3-pip
+
+Windows:
+
+Download Python from https://python.org
+
+During install: ✅ "Add Python to PATH"
+
+
+
+---
+
+✅ 2. Flask + MQTT + SQLite tools
+
+Fedora & Windows (same after Python is installed):
+
+Create a virtual environment:
+
+python3 -m venv venv
+source venv/bin/activate  # (Windows: venv\Scripts\activate)
+
+Then install dependencies:
+
+pip install flask flask-socketio eventlet paho-mqtt
+
+SQLite is built-in, but if you want tools:
+
+sudo dnf install sqlite sqlitebrowser  # (Windows: use [DB Browser for SQLite](https://sqlitebrowser.org/))
+
+
+---
+
+🌐 Frontend Setup (Vite + Tailwind)
+
+✅ 1. Node.js + npm
+
+Fedora:
+
+sudo dnf install nodejs
+
+Windows:
+
+Install Node.js from https://nodejs.org
+
+
+Verify:
+
+node -v
+npm -v
+
+
+---
+
+✅ 2. Vite + Tailwind Project
+
+Create the frontend app:
+
+npm create vite@latest greenhouse-dashboard
+cd greenhouse-dashboard
+npm install
+
+Install Tailwind:
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+Then edit tailwind.config.js:
+
+content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"]
+
+And in src/index.css:
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Run it:
+
+npm run dev
+
+Boom! You now have a blazing-fast Tailwind-powered UI in Vite, ready to rule over photosynthetic minions.
+
+
+---
+
+🔧 Supporting Tools
+
+✅ Mosquitto (MQTT Broker)
+
+Fedora:
+
+sudo dnf install mosquitto mosquitto-clients
+sudo systemctl enable --now mosquitto
+
+Windows:
+
+1. Download from: https://mosquitto.org/download/
+
+
+2. Use mosquitto.exe to run the broker.
+
+
+
+
+---
+
+✅ Cloudflared Tunnel (for remote testing)
+
+Fedora:
+
+sudo dnf install cloudflared
+
+Windows:
+
+Download from: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/
+
+
+Login & create a tunnel:
+
+cloudflared tunnel login
+cloudflared tunnel --url http://localhost:5000
+
+
+---
+
+🧪 Optional: Dev UX Tools
+
+HTTPie (for API testing):
+
+sudo dnf install httpie
+
+Example: http POST http://localhost:5000/api/command state=ON
+
+Insomnia or Postman (GUI API testing on Windows)
+
+
+
+---
+
+✅ Summary
+
+Tool	Fedora	Windows
+
+Python + pip	sudo dnf install python3 python3-pip	Download from python.org
+Flask, etc.	pip install flask flask-socketio paho-mqtt	Same
+SQLite + DB Browser	sqlitebrowser	sqlitebrowser.org
+Node.js + npm	sudo dnf install nodejs	nodejs.org
+Vite + Tailwind	npm create vite@latest + tailwindcss	Same
+Mosquitto	sudo dnf install mosquitto	mosquitto.org
+Cloudflared	sudo dnf install cloudflared	cloudflare.com
